@@ -19,7 +19,11 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = User.objects.get(username=username)
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            error_message = 'incorrect username/password'
+            return render(request, 'diaries/login.html', {'error_message': error_message})
 
         # FLAW 2
         if user.password == password:
