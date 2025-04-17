@@ -1,0 +1,13 @@
+{% extends './base.html' %}
+
+{% block content %}
+    <h1>Create an account</h1>
+    <form action="{% url 'diaries:signup' %}" method="post">
+        {% csrf_token %}
+        <label for="username">Username (maximum length of 20):</label>
+        <input type="text" name="username" id="username" required maxlength="20"><br>
+        <label for="password">Password (maximum length of 20):</label>
+        <input type="text" name="password" id="password" required maxlength="20"><br>
+        <input type="submit" value="Signup">
+    </form>
+{% endblock %}

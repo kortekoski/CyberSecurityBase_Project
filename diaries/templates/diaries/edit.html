@@ -1,0 +1,10 @@
+{% extends './base.html' %}
+
+{% block content %}
+    <h1>Edit diary entry</h1>
+    <form action="{% url 'diaries:edit' entry.pk %}" method="post">
+        {% csrf_token %}
+        <textarea name="new_entry" rows="6" cols="50">{{ entry.content }}</textarea><br>
+        <input type="submit" value="Edit">
+    </form>
+{% endblock %}

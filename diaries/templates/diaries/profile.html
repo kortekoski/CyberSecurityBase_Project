@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+
+{% block content %}
+    <h1>My secret diary</h1>
+    <h2>Write new entry</h2>
+    <form action="{% url 'diaries:write' %}" method="post">
+        <!-- FLAW 4 
+        FIX:
+        {% csrf_token %}
+        -->
+        <textarea name="entry" rows="6" cols="50"></textarea><br>
+        <input type="submit" value="Write">
+    </form>
+    <br>
+    <br>
+    <h3>Previous entries</h3>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <small>{{ entry.pub_date }}</small>
+                {{ entry.content }}
+                (<a href="{% url 'diaries:edit' entry.pk %}">edit</a>)
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <p><a href="{% url 'diaries:logout' %}">Log out</a></p>
+{% endblock %}

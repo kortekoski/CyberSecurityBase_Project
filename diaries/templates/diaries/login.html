@@ -1,1 +1,20 @@
-<h1>yee</h1>
+{% extends './base.html' %}
+
+{% block content %}
+    <h1>Login</h1>
+    {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <form action="{% url 'diaries:login' %}" method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required maxlength="20"><br>
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password" required maxlength="20"><br>
+        <input type="submit" value="Login">
+    </form>
+    <br>
+    <p><i>
+        <a href="{% url 'diaries:signup' %}">Don't have an account? Sign up here.</a>
+    </i></p>
+{% endblock %}
