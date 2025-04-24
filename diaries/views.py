@@ -38,7 +38,10 @@ def login(request):
     return render(request, 'diaries/login.html')
 
 def logout(request):
-    request.session.pop('user_id')
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
 
     return HttpResponseRedirect(reverse("diaries:index"))
 
@@ -64,6 +67,7 @@ def signup(request):
 
 def write(request):
     text = request.POST.get('entry')
+    print(request.session)
     user_id = request.session['user_id']
     entry_user = User.objects.get(id=user_id)
     new_entry = Entry(content=text, pub_date=timezone.now(), user=entry_user)
@@ -82,7 +86,7 @@ def edit(request, entry_id):
 
         # FLAW 3
         with connection.cursor() as cursor:
-            cursor.execute("UPDATE diaries_entry SET content='" + new_content + "' WHERE id= " + str(entry_id) + ";")
+            cursor.executescript("UPDATE diaries_entry SET content='" + new_content + "' WHERE id= " + str(entry_id) + ";")
 
         # FLAW 3 FIX
         #   cursor.execute("UPDATE diaries_entry SET content = ? WHERE id = ?", (new_content, entry_id))
@@ -110,3 +114,6 @@ def profile(request, user_id):
     entries = Entry.objects.filter(user_id=user_id)
     
     return render(request, 'diaries/profile.html', {'entries': entries})
+
+def csrftest(request):
+    return render(request, 'diaries/csrf_test.html')

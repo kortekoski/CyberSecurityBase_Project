@@ -20,5 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     # FLAW 5 PART 1
     path('admin/', admin.site.urls),
+    # FLAW 5 PART 1 FIX
+    # path('adminwithamoresecreturlwX3335992asdfllssoe992unguessable/', admin.site.urls),
     path('', include('diaries.urls'))
 ]
