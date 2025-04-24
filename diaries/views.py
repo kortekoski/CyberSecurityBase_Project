@@ -85,8 +85,8 @@ def edit(request, entry_id):
             cursor.execute("UPDATE diaries_entry SET content='" + new_content + "' WHERE id= " + str(entry_id) + ";")
 
         # FLAW 3 FIX
-        #entry.content = new_content
-        #entry.save()
+        #   cursor.execute("UPDATE diaries_entry SET content = ? WHERE id = ?", (new_content, entry_id))
+        
 
         session_id = request.session['user_id']
 

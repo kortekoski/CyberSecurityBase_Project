@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # FLAW 5
+    # FLAW 5 PART 1
     path('admin/', admin.site.urls),
     path('', include('diaries.urls'))
 ]
