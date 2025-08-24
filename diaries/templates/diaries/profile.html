@@ -4,10 +4,7 @@
     <h1>My secret diary</h1>
     <h2>Write new entry</h2>
     <form action="{% url 'diaries:write' %}" method="post">
-        <!-- FLAW 4 
-        FIX:
         {% csrf_token %}
-        -->
         <textarea name="entry" rows="6" cols="50"></textarea><br>
         <input type="submit" value="Write">
     </form>

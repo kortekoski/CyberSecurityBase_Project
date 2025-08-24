@@ -99,7 +99,6 @@ def edit(request, entry_id):
         
     return render(request, 'diaries/edit.html', {'entry': entry})
 
-
 def profile(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
